@@ -1,0 +1,7 @@
+<div class="post">
+	<div class="post_author"><%= post.user.login -%></div>
+	<div class="post_date"><%= h post.created_at.to_s(:short) -%></div>
+	<div class="post_body">
+		<%= post.body -%></li>
+	</div>
+</div>

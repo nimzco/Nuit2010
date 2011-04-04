@@ -1,0 +1,68 @@
+<h2> <%= h @google_map.title -%> </h2>
+<% if is_mobile? -%>
+	<%= render(:partial => "map" , :object => @google_map) -%>
+
+	<div id="map_rjs"></div>
+	<script type="text/javascript">
+				new Ajax.Request('/home/tirroir_right_rjs', {
+							method: 'post',
+							parameters: {
+									div_to_replace: 'map_rjs',
+									content: '<div id="map_canvas" class="maps-mobile"></div>',
+									wrapper_id: 'map-wrapper',
+									button_id: 'map-button',
+									button_id_supp: 'pull_the_page_to_map'
+									},
+							onComplete: function() {
+									initialize();
+							}
+							});
+	</script>
+
+	<noscript>
+		<%= render(:partial => "map_static" , :object => @google_map) -%>
+	</noscript>
+<% else -%>
+	<!--TODO si pas de JS : statis map-->
+	<noscript>
+		<%= render(:partial => "map_static" , :object => @google_map) -%>
+	</noscript>
+<% end -%>
+
+	<p><span id="button-supp-carte">Cette carte</span> correspond à l'adresse suivante :<br/>
+		<%= h @google_map.address -%>
+	</p>
+	<p> <%= h @google_map.description -%></p>
+
+	<h3>Ajouter un marqueur</h3>
+<p class="helpme">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<% form_for :marker, :url => {:action => :createMarker, :id => @google_map.id} do |f| -%>
+  <%= f.error_messages :header_message => "Le formulaire n'a pas &eacute;t&eacute; correctement rempli", :message => "" -%>
+  <p>
+    <%= f.label :title, 'Titre' -%><br />
+    <%= f.text_field :title -%>
+  </p>
+  <p>    <%= f.label :color, 'Couleur' -%><br />
+	<%= f.select :color, GoogleMarker.colors -%></p>
+  <p>
+    <%= f.label :address, 'Adresse' -%><br />
+    <%= f.text_field :address -%> <input type='button' id="pull_the_page_to_map" value="Tester l'adresse" onclick='testAddress()' /> <span class="exemple-adresse">(Exemple : 20 avenue Jean-Jaurès Nice)</span>
+  </p>
+  <p>
+    <%= f.label :description -%><br />
+    <%= f.text_area :description -%>
+  </p>
+  <p>
+    <%= f.submit 'Create' -%>
+  </p>
+<% end -%>
+
+
+<% if !is_mobile? %>
+	<%= render(:partial => "map" , :object => @google_map) -%>
+	<script type="text/javascript"><!--
+		document.write('<div id="map_canvas" class="maps-mobile"></div>');
+		initialize();
+		//-->
+	</script>
+<% end -%>

@@ -1,0 +1,12 @@
+<div id="quick-search-com">
+	<fieldset id="comfield"> <legend>Trouvez une communauté</legend>
+	<% form_tag :controller => "comunities", :action => "search", :id => 0 do %>
+		<p> <label for="comunity">Communauté</label><br/><%= text_field_tag :comunity, params[:comunity] %>
+		</p>
+		<p><%= submit_tag "Rechercher"%>
+		</p> 
+		<% end %>
+	</fieldset>
+	<div class="clear"></div>
+</div>
+	<p class="helpme">Vous pouvez effectuer une recherche même si vous ne remplissez pas tous les champs. Les résultats affichés correspondront au mieux à ce que vous cherchez.</p>

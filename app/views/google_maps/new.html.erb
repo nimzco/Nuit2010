@@ -1,0 +1,98 @@
+<fieldset>
+<legend>Nouvelle carte</legend>
+<p class="help-me">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<% if is_mobile? -%>
+		<div id="cal_rjs"></div>
+		<%
+			### Put the map in the canvas via Ajax
+		%>
+		<script type="text/javascript">
+					new Ajax.Request('/home/tirroir_left_rjs', {
+								method: 'post',
+								parameters: {
+										div_to_replace: 'cal_rjs',
+										content: '<div id="map_canvas" class="maps-mobile" ></div>',
+										wrapper_id: 'map-wrapper',
+										button_id: 'pull_the_page_to_mapSupp',
+										button_id_supp: 'pull_the_page_to_map'
+										},
+							onComplete: function() {
+									initialize();
+							}
+								});
+		</script>
+<% else %>
+	<script type="text/javascript"><!--
+		document.write('<div id="map_canvas" class="maps-desktop"></div>');
+		//-->
+	</script>
+<% end -%>
+<% form_for(@google_map) do |f| -%>
+  <%= f.error_messages :header_message => "Le formulaire n'a pas &eacute;t&eacute; correctement rempli", :message => "" -%>
+
+  <p>
+    <%= f.label :title -%><br />
+    <%= f.text_field :title -%>
+  </p>
+  <p>
+
+	<%= f.label :zoom, 'Echelle' -%><br/>
+    <%= f.select :zoom, GoogleMap.zooms, :selected => GoogleMap.zooms[4] -%>
+  </p>
+  <p>
+    <%= f.label :address, 'Adresse' -%><br/>
+    <%= f.text_field :address -%><span class="exemple-adresse">(Exemple : Paris France)</span>
+    <br/><input id="pull_the_page_to_map" type='button' value="Tester l'adresse et l'echelle" onclick='testAddress()'/>
+  </p>
+  <p>
+    <%= f.label :description -%><br />
+    <%= f.text_area :description -%>
+  </p>
+  <p>
+    <%= f.submit 'Cr&eacute;er' -%>
+  </p>
+<% end -%>
+
+</fieldset>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+</script>
+<script type="text/javascript">
+
+	var geocoder;
+	var map;
+
+	function testAddress() {
+		var address = document.getElementById("google_map_address").value;
+		geocoder.geocode( { 'address': address}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+				map.setZoom(parseInt(document.getElementById("google_map_zoom").value));
+			} else {
+				alert("Geocode was not successful for the following reason: " + status);
+			}
+		});
+	}
+
+	function initialize() {
+
+		geocoder = new google.maps.Geocoder();
+
+		var myOptions = {
+			zoom: 6,
+			mapTypeId: google.maps.MapTypeId.HYBRID
+		}
+		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		geocoder.geocode( { 'address': 'Bourges, France'}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+			}
+		});
+	}
+	window.onload = initialize;
+</script>
+<% if !is_mobile? %>
+	<p class="note">Le fait de scroller sur la carte modifie son echelle</p>
+<% end %>
+
+<%= link_to 'Retour', google_maps_path -%>

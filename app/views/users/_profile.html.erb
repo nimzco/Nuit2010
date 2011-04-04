@@ -1,0 +1,21 @@
+
+	<dl>
+		<dt>Nom</dt>
+		<dd>&nbsp;<%= h profile.name %></dd>
+	<% if is_mobile? %>
+				<div id="profile_rjs"></div>
+		<%end%>
+		<dt>Adresse</dt>
+		<dd <%= is_mobile? ? 'id="map-button-profile-supp"' : '' %>>&nbsp;<%= h profile.address %></dd>
+	
+		<dt>Numéro de téléphone</dt>
+		<dd>&nbsp;<%= h profile.phone_number %></dd>
+	
+		<dt>Adresse mail</dt>
+		<dd>&nbsp;<%= h profile.email %></dd>
+
+		<% if !profile.comunity.nil? %>
+		<dt>Communauté</dt>
+			<dd>&nbsp;<%= h profile.comunity.name %></dd>
+		<% end %>
+	</dl>

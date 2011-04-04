@@ -1,0 +1,44 @@
+<% if !table.nil? -%>
+		<script src="https://www.google.com/jsapi" type="text/javascript"></script>
+		<div id="visualization-table"></div>
+		<script type="text/javascript">
+		
+		  google.load('visualization', '1', {packages:['table']});
+		  google.setOnLoadCallback(drawTable);
+		
+			function drawTable() {
+			  var data = new google.visualization.DataTable();
+			<% #@columnTypeAndName = [['string','Name'],['number','Salary'],['boolean','Full Time']] -%>
+				
+		<%
+			############################################################################################## Adding column with their type of value and name 
+			## Type of value: array which contains an array associating the type of the column value and the column name
+			## Example:
+			## 		@columnTypeAndName = [['string','Name'],['number','Salary'],['boolean','Full Time']]
+		%> 
+		
+				<%= render :partial => 'column', :collection => table.headers -%>
+		
+			  <% 
+			  	#@cellInformation = [['John', 1000, true], ['Mary', 25000, true], ['Paul', 4000, false]] 
+			  -%>
+		
+				<%= render :partial => 'data_cell', :object => table -%>
+			
+			  var table = new google.visualization.Table(document.getElementById('visualization-table'));
+			  table.draw(data, {showRowNumber: true});
+			
+			  google.visualization.events.addListener(table, 'select', function() {
+			    var row = table.getSelection()[0].row;
+		
+			  });
+			}
+		</script>
+
+		<noscript>
+			<%= render :partial => 'html_table', :object => table -%>
+		</noscript>
+
+<% else -%>
+	<p>Data display problem</p>
+<% end -%>

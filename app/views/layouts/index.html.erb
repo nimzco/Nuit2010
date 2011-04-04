@@ -1,0 +1,162 @@
+<%
+	##TODO: Vendre le site: 
+	## Version mobile :
+	##				Retrouvez également notre site dans une version desktop
+	## Version desktop
+	##				Retrouvez également notre site dans une version mobile
+%>
+<% if is_mobile? -%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>Roadrunner On Rails</title>
+		<meta http-equiv="Cache-control" content="max-age=3600"/>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+		<%= stylesheet_link_tag 'mobile' -%>
+ 		<meta name="viewport" content="user-scalable=yes, width=device-width" />
+ 		<%= stylesheet_link_tag 'mobile' %>
+ 		<%= javascript_include_tag 'jquery-1.4.4' %>
+ 		<%= javascript_include_tag 'prototype' %>
+ 		<%= javascript_include_tag 'application-mobile' %>
+	</head>
+	<body>
+		<div id="header-wrap">
+			<div id="header">
+		    	<h1>Roadrunner On Rails</h1>
+  		</div>
+	    </div>
+		<div id="wrapper">
+				<div id="menu-wrapper" class="first-time">
+					<noscript>
+						<%= render "shared/menu_mobile_without_js" -%>
+					</noscript>
+				</div>
+	       		<% if flash[:notice] -%>
+				   	<div id="notice">
+				   		<%= flash[:notice] -%>
+				   	</div>
+				<% end -%>
+				<% if flash[:error] -%>
+				   	<div id="error">
+				   		<%= flash[:error] -%>
+				   	</div>
+				<% end -%>
+	    	<div id="content-wrapper">
+	    		<div id="teaser">
+		    		<% if (params[:controller] == 'home' && params[:action] == 'index') || (params[:controller] == 'trips') %> 
+		    			<%= render "shared/quick_search_trip" -%>
+		    		<% end %>
+		    		<% if (params[:controller] == 'comunities' && params[:action] == 'index') || (params[:controller] == 'comunities' && params[:action] == 'search') %> 
+		    			<%= render "shared/quick_search_comunity" -%>
+		    		<% end %>
+	    		</div>
+	    		<% if params[:controller] != 'home' || params[:action] != 'index' %> 
+					<%= render(:partial => "shared/line_navigation") -%>
+				<% end %>
+		    		<div id="content-mobile">
+		    			<%= yield -%>
+		    		</div>
+		    </div>
+		</div>
+		<script type="text/javascript">
+			new Ajax.Request('/home/menu_mobile_rjs', {method: 'get',onComplete: function(transport) {showAndHideMe('#menu-wrapper', '#button-menu', 'menu-non-animate', 'menu-animate', 'menu-top', 'menu-down', 'fleche-haut' );}});
+			new Ajax.Request('/home/login_mobile_rjs', {method: 'get',onComplete: function(transport) {showAndHideMe('#login-wrapper.tirroir-left', '#login-button', 'tirroir-left-non-animate', 'tirroir-left-animate', 'tirroir-left-ferme', 'tirroir-left-sorti', 'fleche-gauche', '#' );}});
+		</script>
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-22397085-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+			
+	</script>
+
+ 	</body>
+</html>
+<% else -%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>Roadrunner On Rails</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<%= stylesheet_link_tag 'fonts/stylesheet' -%>
+ 		<%= stylesheet_link_tag 'global' -%>
+ 		<!--[if lte IE 7]>
+				<link href="css/IE/cssForIE.css" rel="stylesheet" type="text/css" />
+		<![endif]-->
+	</head>
+	<body>			
+		<div id="header-wrap">
+			<div id="evitement">
+				<a href="#menu">Aller au menu</a> | 
+		    	<a href="#content-wrapper">Aller au contenu</a>
+		       | 
+		       <% if logged_in? %>
+			       <%= link_to 'Se déconnecter', :controller => "sessions", :action => "destroy" -%>
+		       <% else %>
+		       	<span id="button-link"><%= link_to 'Connexion', { :controller => "login" }, :class => 'genericPerson' -%></span>
+		       | 	<%= link_to 'S\'enregister', :controller => "users", :action => "new" -%>
+		       <% end %>
+			</div>
+      			<% if flash[:notice] -%>
+				   	<div id="notice">
+				   		<%= flash[:notice] -%>
+				   	</div>
+				<% end -%>
+				<% if flash[:error] -%>
+				   	<div id="error">
+				   		<%= flash[:error] -%>
+				   	</div>
+				<% end -%>
+			<div id="header">
+		    	<h1>Roadrunner On Rails</h1>
+			</div>
+	 	</div>
+		<div id="wrapper">
+     		<%= render "shared/menu" -%>
+	    	<div id="content-wrapper">
+		    	<div id="teaser">
+		    		<% if (params[:controller] == 'home' && params[:action] == 'index') || (params[:controller] == 'trips') %> 
+		    			<%= render "shared/quick_search_trip" -%>
+		    		<% end %>
+		    		<% if (params[:controller] == 'comunities' && params[:action] == 'index') || (params[:controller] == 'comunities' && params[:action] == 'search') %> 
+		    			<%= render "shared/quick_search_comunity" -%>
+		    		<% end %>
+	    		</div>
+	    		<% if params[:controller] != 'home' || params[:action] != 'index' %> 
+					<%= render(:partial => "shared/line_navigation") -%>
+				<% end %>
+		  		<div id="col2-right">
+            		<div id="col2-content" class="clearfix">
+               			<%= yield -%>
+            		</div>
+            		<div id="ie_clearing"> &#160; </div>
+          		</div>
+		    </div>
+		    <div id="footer">
+		    </div>
+		</div>
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-22397085-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+			
+	</script>
+			<%= javascript_include_tag 'lib' -%>
+			<%= javascript_include_tag 'prototype' -%>
+	 		<%= javascript_include_tag 'application' -%>
+  </body>
+</html>
+<% end -%>

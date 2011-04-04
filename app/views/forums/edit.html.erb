@@ -1,0 +1,20 @@
+<fieldset>
+<legend>Editer le forum</legend>
+
+<% form_for(@forum) do |f| -%>
+  <%= f.error_messages :header_message => "Le formulaire n'a pas &eacute;t&eacute; correctement rempli", :message => "" -%>
+  <p>
+    <%= f.label :name -%><br />
+    <%= f.text_field :name -%>
+  </p>
+  <p>
+    <%= f.label :description -%><br />
+    <%= f.text_area :description -%>
+  </p>
+  <p>
+    <%= f.submit 'Update' -%>
+  </p>
+<% end -%>
+</fieldset>
+<%= link_to 'Show', @forum -%> |
+<%= link_to 'Back', forums_path -%>

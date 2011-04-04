@@ -1,0 +1,1 @@
+page.replace_html("menu-wrapper", :partial => "shared/menu_mobile_js")

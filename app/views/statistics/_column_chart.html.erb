@@ -1,0 +1,71 @@
+<%
+	## Similar to _table.html.erb
+%>
+
+<% if !column_chart.nil? -%>
+	<% if !is_mobile? -%>
+		
+		<script src="https://www.google.com/jsapi" type="text/javascript"></script>	
+		<div id="visualization-columnChart"></div>		
+		<script type="text/javascript">
+      google.load("visualization", "1", {packages:["columnchart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+
+
+				<%= render :partial => 'column', :collection => column_chart.headers -%>
+
+			  <% 
+			  	#@cellInformation = [['John', 1000, true], ['Mary', 25000, true], ['Paul', 4000, false]] 
+			  -%>
+
+				<%= render :partial => 'data_value', :object => column_chart -%>
+				
+        var chart = new google.visualization.ColumnChart(document.getElementById('visualization-columnChart'));
+        chart.draw(data, {width: 400, height: 240, title: '<%= column_chart.title -%>',
+                          hAxis: {title: '<%= column_chart.axis_title -%>', titleTextStyle: {color: 'red'}},
+                          colors: ['#e7dcb2','#4d351f']
+                         });
+      }
+    </script>
+
+   <% end -%>
+   
+	<% if !is_mobile? -%>   
+		<noscript>
+	<% end %>
+	<% ## If width < 600 show width else show 600x500	           
+		if column_chart.number_of_row * 100 + 80 < 600
+				@width = (column_chart.number_of_row * 100 + 80).to_s
+				@height = (column_chart.number_of_row * 75).to_s
+		else
+				@width = '600'
+				@height = '500'
+		end
+		if column_chart.number_of_row * 100 + 80 < 250
+				@width = '250'
+				@height = '250'
+		end
+	%>
+			<div id="image_statistics">
+				<%= image_tag Gchart.bar( :title => column_chart.title,
+											           :data => column_chart.data_per_column, 
+											           :bar_colors => 'e7dcb2,4d351f',
+											           :stacked => false, 
+												         :size => @width + 'x' + @height,
+											           :legend => 	column_chart.header_names,
+																 :bar_width_and_spacing => {:width => 30, :spacing => 1, :group_spacing => 0},
+											           :axis_with_labels => ['x','y'],
+										             :axis_labels => [column_chart.x_label],
+										             :max_value => column_chart.max_value,
+										             :min_value => 0) + '&chof=gif', :alt => "", :width => @width, :height => @height
+				%>
+			</div>
+ 			<%= render 'html_table', :object => column_chart -%>
+	<% if !is_mobile? -%>
+		</noscript>
+	<% end %>
+<% else -%>
+	<p>Data display problem</p>
+<% end -%>

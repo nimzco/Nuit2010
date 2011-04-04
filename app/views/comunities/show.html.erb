@@ -1,0 +1,55 @@
+
+  <h3><%=h @comunity.name %></h3>
+<div id="comunity-show">
+	<div id="comunity-desc">
+		<% if is_mobile? %>
+				<div id="profile_rjs"></div>
+		<%end%>
+		<p <%= is_mobile? ? 'id="map-button-community-supp"' : '' %> >Addresse :
+		  		<%= @comunity.address %>
+		</p>
+		
+		<p>Mots-clés :
+		  <%=h @comunity.keywords %>
+		</p>
+		
+		<p>
+		  Description :
+		  <%=h @comunity.description %>
+		</p>
+	</div>
+<% if !@map.nil? -%>
+
+	<%= render(:partial => "google_maps/map" , :object => @map) -%>
+	<% if is_mobile? -%>
+
+		<script type="text/javascript"><!--
+					new Ajax.Request('/home/tirroir_right_rjs', {
+								method: 'post',
+								parameters: {
+										div_to_replace: 'profile_rjs',
+										content: '<div id="map_canvas" class="maps-mobile"></div>',
+										wrapper_id: 'map-wrapper',
+										button_id: 'map-button-community',
+										button_id_supp: 'map-button-community-supp'
+										},
+							onComplete: function() {
+									initialize();
+							}
+								});
+								//-->
+		</script>
+	<% else %>
+		<script type="text/javascript"><!--
+		document.write('<div id="map_canvas" class="maps-mobile"></div>');
+		initialize();
+		//-->
+		</script>
+
+	<% end -%>
+	<noscript>
+		<div><%= render(:partial => "google_maps/map_static" , :object => @map) -%></div>
+	</noscript>
+<% end -%>
+</div>
+<%= render 'shared/line_navigation' -%>

@@ -1,0 +1,1 @@
+page.replace_html(params[:div_to_replace], :partial => "shared/tirroir_left", :object => {:content => params[:content], :wrapper_id => 	params[:wrapper_id], :button_id => params[:button_id], :button_id_supp => params[:button_id_supp]})

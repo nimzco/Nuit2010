@@ -1,0 +1,21 @@
+<noscript>
+	<div id="login-wrap">
+		<div id="button-login" class="genericPerson">
+			<% if !logged_in? -%> 
+		        <span id="button-link"><%= link_to 'Connexion', { :controller => "login" }, :class => 'genericPerson' -%></span>
+			<% else -%>
+	    <% if current_user.facebook_user? -%>
+	         <a href="#" onclick='FB.Connect.logoutAndRedirect("/logout")' class='genericPerson' >Logout</a>
+	    <% else -%>
+	         <%= link_to 'Logout', logout_path, :class => 'genericPerson' -%>
+	    <% end -%>
+			<% end -%>
+			|
+			<% if !logged_in?%>
+				<div id="divLogin">
+        			<%= link_to 'Se déconnecter', logout_path, :id => 'logout-button' -%>
+        		</div>
+			<% end -%>
+		</div>
+	</div>
+</noscript>

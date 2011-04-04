@@ -1,0 +1,22 @@
+<fieldset>
+<legend>Editer le sujet</legend>
+
+<% form_for(@topic) do |f| -%>
+  <%= f.error_messages :header_message => "Le formulaire n'a pas &eacute;t&eacute; correctement rempli", :message => "" -%>
+
+  <p>
+    <%= f.label :title -%><br />
+    <%= f.text_field :title -%>
+  </p>
+  <p>
+    <%= f.label :description -%><br />
+    <%= f.text_area :description -%>
+  </p>
+  <p>
+    <%= f.submit 'Update' -%>
+  </p>
+<% end -%>
+</fieldset>
+
+<%= link_to 'Show', @topic -%> |
+<%= link_to 'Back', :controller => 'Topics', :action => @topic.id -%>

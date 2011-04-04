@@ -1,0 +1,93 @@
+<h2>Accessibilit&eacute;</h2>
+
+<h3>Un site accessible n'est pas un site limit&eacute; !</h3>
+<p>
+	Pourquoi limiter ses fonctionalit&eacute;s et se restreindre dans ses choix technologiques ?
+	Un site peu interragir avec des API externes tel que Facebook, Google Maps, Calendar et Visualization tout en restant accessible au plus grand nombre. 
+	Pour ce site internet, nous avons fait de notre mieux pour developper une application web jeune qui est compatible avec les plus grande plateforme du moment.
+	Le site que nous avons d&eacute;velopp&eacute;, qui interragi avec google calendar, visualization et facebook, pr&eacute;serve un c&ocirc;t&eacute; accessible en proposant des alternatives &agrave; ces services.
+	<br/>
+	Mais nous avons poussez les limites plus loin encore en proposant une version mobile accessible qui s'adapte &agrave; toute les r&eacute;slutions et toutes les technologies (avec ou sans javascript notamment).
+	
+</p>
+
+<h3>Quels sont les &eacute;l&eacute;ments de votre application qui ont &eacute;t&eacute; impact&eacute;s par le d&eacute;fi accessibilit&eacute; ?</h3>
+
+<dl>
+	<dt>Les images</dt>
+	<dd>Une alternative textuelle est propos&eacute; pour toute les images.</dd>
+	<dd>Nous avons veill&eacute; &agrave; ce que le site reste lisible m&ecirc;me si les images sont d&eacute;sactiv&eacute;es</dd>
+
+	<dt>Formulaire et tableau</dt>
+	<dd>Tous les formulaires et tableaux de notre site sont adapt&eacute;s pour les d&eacute;fiscients visuels.</dd>
+	
+	<dt>Les effets javascript</dt>
+	<dd>Bien que le javascript soit massivement utilis&eacute; par les grands services web (FaceBook, Google...), notre site reste fonctionel et accessible. Sa desactivation n'ayant pas d'impact sur l'utilisabilit&eacute; et la lisibilit&eacute; du site. Par exemple, dans les cas comme l'utilisation de graphique anim&eacute; (google visualization) une alternative image et tabulaire (pour pr&eacute;senter les donn&eacute;es aux d&eacute;fiscients visuels) est mis &agrave; disposition lors de la d&eacute;sactivation du javascript.</dd>
+	
+	<dt>Contrastes et couleurs</dt>
+	<dd>A l'aide de logiciels qui simulent les diff&eacute;rents type de daltonisme, nous avont v&eacute;rifi&eacute; que le contraste et la luminosit&eacute; sont suffisant afin que l'information reste lisible sur l'ensemble du site.</dd>
+	
+	<dt>Version mobile</dt>
+	<dd>Le terme accessibilit&eacute; ne se limitant pas uniquement aux d&eacute;ficients visuelles, nous avons d&eacute;velopp&eacute; une version qui s'adapte &agrave; toutes les r&eacute;solutions et notamment une version plus sp&eacute;cifique pour les navigateurs mobile.</dd>
+
+</dl>
+<% if !is_mobile? %>
+<div id="capture-ecran">
+<a href="/images/IMG_0008.PNG"><img src="/images/IMG_0008.PNG" alt="" width="160" height="240" />Capture d'écran sur iPhone 1</a>
+<a href="/images/IMG_0009.PNG"><img src="/images/IMG_0009.PNG" alt="" width="160" height="240" />Capture d'écran sur iPhone 2</a>
+<a href="/images/IMG_0010.PNG"><img src="/images/IMG_0010.PNG" alt="" width="160" height="240" />Capture d'écran sur iPhone 3</a>
+<a href="/images/Android.png"><img src="/images/Android.png" alt="" width="160" height="240" />Capture d'écran sur Android</a>
+<a href="/images/Android2.png"><img src="/images/Android2.png" alt="" width="160" height="240" />Capture d'écran sur Android 2</a>
+</div>
+<% end %>
+
+<h3>Quels sont les “moyens” utilis&eacute;s pour valider l'accessibilit&eacute; ?</h3>
+
+<p class="note">Pour les outils qui le permettent, vous pourrez, en cliquant sur le lien, acc&eacute;der directement &agrave; leur validation.</p>
+
+<dl>
+		<dt><a href="http://validator.w3.org/check?uri=http%3A%2F%2Fnuit.heroku.com%2F&charset=%28detect+automatically%29&doctype=Inline&group=0/">Validateur W3C</a> et <a href="http://validator.w3.org/mobile/check?docAddr=nuit.heroku.com%2F&async=true"> validateur W3C mobile</a></dt>
+		<dd>Tout d'abord il a &eacute;t&eacute; n&eacute;cessaire de valider toutes les pages du site, pour la version mobile ainsi que desktop.</dd>
+		<dt><a href="http://wave.webaim.org/report?url=http%3A%2F%2Fnuit.heroku.com%2F&js=2">Wave</a> et <a href="http://www.tawdis.net/" >Tawdis</a></dt>
+		<dd>Outils permettant de d&eacute;tecter les erreurs d'accessibilit&eacute;s les plus courantes (par example l'absence d'un alt sur une image), affichant la structure du document nous permettant de v&eacute;rifier sa s&eacute;mentique.
+		Tawdis permet de d&eacute;tecter des erreurs plus avanc&eacute;es correspondant aux recommendations WCAG 2.0</dd>
+
+		<dt><a href="http://www.checkmycolours.com/">Check my colours</a></dt>
+		<dd>Permet de v&eacute;rifier si le contraste et la luminosit&eacute; de l'ensemble du site.</dd>
+</dl>
+<p>Ainsi que les documents suivant :</p>
+<ul>
+	<li><a href="http://openweb.eu.org/accessibilite">Openweb</a></li>
+	<li><a href="http://www.pompage.net/pompe/evaluer-accessibilite-site-1/">Pompage - principes de l'accessibilit&eacute; </a></li>
+	<li><a href="http://www.pompage.net/pompe/checklistaccessibilite">Pompage - Check list</a></li>
+	<li><a href="http://www.456bereastreet.com/archive/200603/evaluating_website_accessibility_part_3_digging_deeper/">456 Berea st</a></li>
+	<li><a href="http://www.accessify.com/tools-and-wizards/accessibility-tools/table-builder/">Accessify</a></li>
+	<li><a href="http://www.ocawa.com/fr/faireaudit.htm" >Ocawa</a></li>
+	<li><a href="http://access-key.org/?page_id=12">Access-key</a></li>
+</ul>
+<h3>Quels sont les &eacute;l&eacute;ments de votre site qui ne sont pas “accessibles” ? Pourquoi ?</h3>
+<p>
+	La connexion et l'inscription via l'API Facebook-connect ne sont pas "accessible" cependant il est toujours possible de s'enregistrer et de se connecter sur le site sans passer par ce service.
+</p>
+
+<h3>Ce d&eacute;fi a-t-il impact&eacute; la “beaut&eacute;”, la structure, etc… de votre site ?</h3>
+<p>
+		Non, car l'accessibilit&eacute; ne veux pas dire se restreindre sur les &eacute;l&eacute;ments graphiques.
+		Ceci n'a pas impact&eacute; la beaut&eacute; car nous avons d&eacute;velopp&eacute; un site de fa&ccedil;on d&eacute;gradable. C'est &agrave; dire que nous avons commenc&eacute; par la couche structurelle et de contenu. Puis la mise en page avec la couche CSS, et enfin la couche d'interaction avec le Javascript.
+		Le fait de prendre en compte l'accessibilit&eacute; nous a oblig&eacute; &agrave; 
+</p>
+
+
+<h3>Comment avez-vous envisag&eacute; de pr&eacute;server l'accessibilit&eacute; du site au fil des &eacute;volutions du site s'il entrait en production?</h3>
+<p>
+	En continuant de v&eacute;rifier chaque &eacute;l&eacute;ment lors de son ajout ainsi qu'en faisant des tests r&eacute;gulier sur l'ensemble du site.
+</p>
+
+<h3>Quel est l'int&eacute;r&ecirc;t pour nous, client, de vous acheter un site accessible?</h3>
+<p>
+	Augmentation du confort d'utilisation.
+			Un site accessible est un site qui est r&eacute;fl&eacute;chit dans un soucis d'ergonomie et g&eacute;n&eacute;ralement mieux con&ccedil;u. Avec une navigation plus ais&eacute; et une facilit&eacute; d'acc&eacute;s &agrave; l'information. Un site accessible est g&eacute;n&eacute;ralement aussi plus ergonomique, il a donc plus de chance de satisfaire ses visiteurs.
+	Image de marque.
+	R&eacute;f&eacute;rencement.
+	Interrop&eacute;rabilit&eacute;.
+</p>

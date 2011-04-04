@@ -1,0 +1,80 @@
+<h3>
+<% if @user.name != ""%>
+	<%= h @user.name -%>
+<% else %>
+	<%= h @user.login -%>
+<% end %>
+</h3>
+<p class="note">Vous pouvez laisser votre avis sur cette personne si vous avez déjà effectué un trajet avec celle-ci</p>
+<%= render(:partial => "rates/poly_rates" , :object => {:rates => @user.rates, :user_id => @user.id} ) %>
+
+<div id="profile-content">
+<!-- 	<div id="profile-photo"></div> -->
+	<div id="profile-information"><%= render :partial => 'profile', :object => @user %></div>
+	<% if logged_in? && @user.id == current_user.id %>
+	<%= button_to_remote 'Editer mes infos', { :url => { :action => 'edit_profile', :id => @user.id }, :update => 'profile-information', }, :href => url_for( :action => 'edit_profile', :id => @user.id) %>
+	<% end %>
+
+<% if !@map.nil? -%>
+
+	<!--TODO si pas de JS : statis map-->
+	<%= render(:partial => "google_maps/map" , :object => @map) -%>
+	<% if is_mobile? -%>
+		<script type="text/javascript">
+					new Ajax.Request('/home/tirroir_right_rjs', {
+								method: 'post',
+								parameters: {
+										div_to_replace: 'profile_rjs',
+										content: '<div id="map_canvas" class="maps-mobile"></div>',
+										wrapper_id: 'map-wrapper',
+										button_id: 'map-button-profile',
+										button_id_supp: 'map-button-profile-supp'
+										},
+							onComplete: function() {
+									initialize();
+							}
+								});
+		</script>
+	<% else %>
+		<script type="text/javascript"><!--
+		document.write('<div id="map_canvas" class="maps-mobile"></div>');
+		initialize();
+		//-->
+		</script>
+
+	<% end -%>
+	<noscript>
+		<div><%= render(:partial => "google_maps/map_static" , :object => @map) -%></div>
+	</noscript>
+<% end -%>
+</div>
+
+<h3>Commentaires</h3>
+
+
+	<% @user.comments.each do |comment| %>
+
+		<%= render(:partial => "comments/comment_div" , :object => comment) %>
+
+	<% end %>
+	
+<% if logged_in? %>
+<fieldset>
+<legend>Ajouter un commentaire</legend>
+<% form_for :comment, :url => {:controller => "Comments", :action => 'create'} do |f| %>
+  <%= f.error_messages %>
+
+  <%= f.hidden_field :user_id, :value => @user.id  %>
+
+  <p>
+    <%= f.label :message %><br />
+    <%= f.text_area :message %>
+  </p>
+  <p>
+    <%= f.submit 'Poster' %>
+  </p>
+<% end %>
+</fieldset>
+
+
+<% end %>

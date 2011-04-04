@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/web10_01/!svn/ver/141/studentforge/app/views/comments
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/web10_01/!svn/ver/139/studentforge/app/views/comments/edit.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/web10_01/!svn/ver/132/studentforge/app/views/comments/index.html.erb
+END
+_comment_td.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/web10_01/!svn/ver/132/studentforge/app/views/comments/_comment_td.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/web10_01/!svn/ver/139/studentforge/app/views/comments/new.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/web10_01/!svn/ver/132/studentforge/app/views/comments/show.html.erb
+END
+_comment_div.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/web10_01/!svn/ver/141/studentforge/app/views/comments/_comment_div.html.erb
+END

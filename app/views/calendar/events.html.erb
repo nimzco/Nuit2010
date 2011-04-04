@@ -1,0 +1,3 @@
+<% @title = "Events for #{@calendar.title}"%>
+<%= render :partial => 'events' -%>
+<%= link_to 'Nouveau événement', :controller => 'calendar', :action => 'new', :calendar_id => @calendar.id %>

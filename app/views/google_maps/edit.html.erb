@@ -1,0 +1,71 @@
+<fieldset>
+<legend>Editer la carte</legend>
+
+<% form_for(@google_map) do |f| -%>
+  <%= f.error_messages :header_message => "Le formulaire n'a pas &eacute;t&eacute; correctement rempli", :message => "" -%>
+  <p>
+    <%= f.label :title, 'Titre de la carte' -%><br />
+    <%= f.text_field :title, :value => @google_map.title -%>
+  </p>
+  <p>
+    <%= f.label :address, 'Adresse' -%>
+    <%= f.text_field :address, :value => @google_map.address -%><span class="exemple-adresse">(Exemple : 20 avenue Jean-Jaurès Nice)</span>
+	<%= f.label :zoom, 'Echelle' -%>
+    <%= f.select :zoom, options_for_select(GoogleMap.zooms, @google_map.zoom) -%><input type='button' value="Tester l'adresse" onClick='testAddress()' />
+  </p>
+  <p>
+    <%= f.label :description -%><br />
+    <%= f.text_area :description, :value => @google_map.description -%>
+  </p>
+  <p>
+    <%= f.submit 'Update' -%>
+  </p>
+<% end -%>
+</fieldset>
+
+
+<script type="text/javascript"
+	src="http://maps.google.com/maps/api/js?sensor=false">
+</script>
+<script type="text/javascript">
+
+	var geocoder;
+	var map;
+
+	function testAddress() {
+		var address = document.getElementById("google_map_address").value;
+		geocoder.geocode( { 'address': address}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+				map.setZoom(parseInt(document.getElementById("google_map_zoom").value));
+			} else {
+				alert("Geocode was not successful for the following reason: " + status);
+			}
+		});
+	}
+
+	function initialize() {
+
+		geocoder = new google.maps.Geocoder();
+
+		var myOptions = {
+			zoom: 6,
+			mapTypeId: google.maps.MapTypeId.HYBRID
+		}
+		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		geocoder.geocode( { 'address': "<%= @google_map.address -%>"}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+				map.setZoom(<%= @google_map.zoom -%>);
+			}
+		});
+
+		
+
+	}
+	window.onload = initialize;
+</script>
+<div id="map_canvas" style="width:100%; height:<%= (is_mobile? ? '300px' : '500px') -%>" ></div>
+
+<%= link_to 'Show', @google_map -%> |
+<%= link_to 'Back', google_maps_path -%>

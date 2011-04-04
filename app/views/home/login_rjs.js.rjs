@@ -1,0 +1,1 @@
+page.replace_html("topnav", :partial => "shared/login_js")

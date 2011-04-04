@@ -1,0 +1,20 @@
+<h1>Editing comment</h1>
+
+<% form_for :comment, :url => { :action => 'updateCom', :id => @comment.id} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :message %><br />
+    <%= f.text_area :message %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', :controller => 'comments', :action => 'show', :id => @comment.id %>
+<% if @comment.type == "ProjectComment" -%>
+	<%= link_to 'Back to project', :controller => 'projects', :action => 'show', :id => @comment.project_id %>
+<% elsif @comment.type == "NewsComment" -%>
+	<%= link_to 'Back to news', :controller => 'news', :action => 'show', :id => @comment.news_id %>
+<% end -%>

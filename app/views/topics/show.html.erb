@@ -1,0 +1,50 @@
+<p><%=h link_to 'Forum', forums_path -%> &gt; <%=h link_to @topic.forum.name, :controller => 'forums', :action =>  @topic.forum.id%> &gt; <%=h link_to @topic.title, :action =>  @topic.id -%></p>
+
+<h2>
+  <%=h @topic.forum.name -%>
+</h2>
+
+<div class="topic_title">
+  <%=h @topic.title -%>
+</div>
+<div class="topic_author">
+	<%= link_to @topic.user.name -%>
+</div>
+<div class="topic_date">
+	<%= h @topic.created_at.to_s(:short) -%>
+</div>
+<div class="topic_description">
+  <%=h @topic.description -%>
+</div>
+
+<div class="all_posts">
+	<%= render :partial => 'posts/post', :collection => @topic.posts -%>
+	<div id="ajaxWrapper">
+	</div>
+</div>
+<%	if logged_in? -%>
+	<fieldset>
+	<legend>Répondre</legend>
+	<% remote_form_for :post, 
+										 :url => { :controller => 'posts', :action => 'create' },
+										 :update => 'ajaxWrapper',
+										 :complete => "$('post_text_area').clear()",
+										 :position => :bottom  do |form| -%>
+										 
+		<%= form.text_area :body, :id => 'post_text_area' -%>
+		<%= form.hidden_field :topic_id, :value => @topic.id -%>
+		<%= submit_tag 'Post' -%>
+	<% end -%>
+	</fieldset>
+<% end -%>
+
+
+<div class="footer_links">
+	<% if session[:user_id] == @topic.user_id%>
+		<%	if logged_in? -%>
+			<%= link_to 'Post a message', :controller => 'Posts', :action => 'new', :topic_id => @topic.id  -%>
+		<% end -%>
+		<%= link_to 'Edit the topic', edit_topic_path(@topic) -%>
+	<% end -%>
+	<%= link_to 'Back', :controller => "Forums", :action => @topic.forum_id -%>
+</div>

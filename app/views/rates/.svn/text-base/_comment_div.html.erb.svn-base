@@ -1,0 +1,18 @@
+<div class='comment'>
+
+	<h3><%=h comment_div.title %></h3>
+
+	
+
+	<p class='message'>
+		<%=h comment_div.message %>
+	</p>
+
+	<% if  logged_in? && (session[:user][:user_type_id] == 3 || session[:user][:id] == comment_div.user_id) -%>
+		<%= link_to 'Edit', edit_comment_path(comment_div) %> 
+		<%= link_to image_tag('icon/delete.png', :alt => 'Delete')+' Delete', {:controller => 'comments', :action => 'destroy', :id => comment_div.id}, :confirm => 'Do you want to delete this comment?', :method => :delete %>
+	<% end -%>
+
+	<%= render(:partial => "users/user_div" , :object => comment_div.user) %>
+
+</div>

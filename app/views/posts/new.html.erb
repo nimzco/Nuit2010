@@ -1,0 +1,18 @@
+<fieldset>
+<legen>Nouveau post</legent>
+
+<% form_for(@post) do |f| -%>
+  <%= f.error_messages :header_message => "Le formulaire n'a pas &eacute;t&eacute; correctement rempli", :message => "" -%>
+
+  <p>
+    <%= f.label :body -%><br />
+    <%= f.text_area :body -%>
+  </p>
+    <%= f.hidden_field :topic_id, :value => params[:topic_id] -%>
+  <p>
+    <%= f.submit 'Create' -%>
+  </p>
+<% end -%>
+</fieldset>
+
+<%= link_to 'Back', :controller => 'Forums' -%>

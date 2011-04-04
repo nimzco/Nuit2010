@@ -1,0 +1,9 @@
+<td class='comment'>
+
+	<p class='message'>
+		<%=h comment_td.message %>
+	</p>
+
+	<%= link_to_unless !logged_in? || !(session[:user][:user_type_id] == 3) || !(session[:user][:id] == comment_td.user_id), 'Edit', edit_comment_path(comment_td) %>
+
+</td>

@@ -1,0 +1,42 @@
+<fieldset>
+<legend>Editer un trajet</legend>
+<% form_for(@trip) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :start_address %><br />
+    <%= f.text_field :start_address %>
+  </p>
+  <p>
+    <%= f.label :end_address %><br />
+    <%= f.text_field :end_address %>
+  </p>
+  <p>
+    <%= f.label :on_demand %><br />
+    <%= f.check_box :on_demand %>
+  </p>
+  <p>
+    <%= f.label :start_date %><br />
+    <%= f.datetime_select :start_date %>
+  </p>
+  <p>
+    <%= f.label :end_date %><br />
+    <%= f.datetime_select :end_date %>
+  </p>
+  <p>
+    <%= f.label :seat %><br />
+    <%= f.text_field :seat %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+</fieldset>
+
+
+<%= link_to 'Show', @trip %> |
+<%= link_to 'Back', trips_path %>

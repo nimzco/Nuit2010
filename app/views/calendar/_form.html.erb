@@ -1,0 +1,35 @@
+<% form_for 'event', :url => {:action => :save} do |e| -%>
+	<% if not @event.id; @account.check_public = false -%>
+		<!--<p>Calendar: <%= select_tag 'calendar_id', options_for_select(@account.calendars.collect{|c| [c.title, c.id]}) -%></p>-->
+	<% end; @account.check_public = true -%>
+
+	<%= hidden_field_tag 'event_id', @event.id -%>
+	<%= hidden_field_tag 'calendar_id', params[:calendar_id] -%>
+
+	<p><%= e.label :title, 'Titre' -%><br/>
+	<%= e.text_field :title, :value => !@event.title.nil? ? @event.title.gsub(/<b class=\'userAuthor\'.*<\/b> : /, '') : '' -%></p>
+
+	<p><%= e.label :where, 'Lieu' -%><br/>
+	<%= e.text_field :where -%></p>
+
+	<p><%= e.label :content, 'Details' -%><br/>
+	<%= e.text_area :content, :value => !@event.content.nil? ? @event.content.gsub(/\n<br\/><a class=\'userAuthor\'.*$/, '') : ''  -%></p>
+
+	<p><%= e.label :all_day, "L'événement dure-t-il toute la journée ? " -%>
+	<%= e.select :all_day, [['Oui', 'true'], ['Non', 'false']] -%></p>
+
+	<!--<p>Recurring Event: <%= select_tag :recurrence, options_for_select([['Non', 0], ['Oui', 1]]) -%></p>-->
+
+	<p><%= e.label :start_time, 'Date de début' -%><br/>
+	<%= e.text_field :start_time -%> (mm/jj/aaaa - hh:mm)</p>
+
+	<p><%= e.label :end_time, 'Date de fin' -%><br/>
+	<%= e.text_field :end_time -%> (mm/jj/aaaa - hh:mm)</p>
+
+	<!--<p>Recurrence Start Date/Time: <%= text_field_tag :recurrence_start -%></p>
+	<p>Recurrence End Date/Time: <%= text_field_tag :recurrence_end -%></p>
+	<p>Recurrence Frequency: <%= select_tag :recurrence_freq, options_for_select(['Semaine', 'Jour']) -%> on <%= select_tag :recurrence_on, options_for_select(['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', "Di"])%> 
+	</p>
+	<p>Recur until: <%= text_field_tag :recurrence_until -%></p>-->
+	<%= submit_tag 'Save' -%>
+<% end -%>

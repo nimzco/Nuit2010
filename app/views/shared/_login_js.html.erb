@@ -1,0 +1,30 @@
+<div id="login-and-showbutton" >
+		<div id="login-div">
+		<p>Connectez vous</p>
+		<fieldset>
+		<legend>Connectez vous</legend>
+		<% form_tag session_path do -%>
+				<p><%= label_tag "login", "Identifiant" -%><br />
+				<%= text_field_tag "login", @login -%></p>
+				<p><%= label_tag  "password", "Mot de passe" -%><br/>
+				<%= password_field_tag "password", nil -%></p>
+				<p><%= submit_tag "Se connecter" -%></p>
+		<% end -%>
+		</fieldset>
+		</div>
+		<div id="button-login">
+		<% if !logged_in? -%> 
+		      <a href="#" id="button-link" class="genericPerson">Connexion</a>
+		     | 
+		<% else -%>
+		  <% if current_user.facebook_user? -%>
+		       <a href="#" onclick="FB.Connect.logoutAndRedirect("/logout")" class="genericPerson" >Logout</a>
+		  <% else -%>
+		       <%= link_to "Logout", logout_path, :class => "genericPerson" -%>
+		  <% end -%>
+		<% end -%>
+		<% if !logged_in?%>
+			<%= link_to "S'enregister", :controller => "users", :action => "new" -%> 
+		<% end -%>
+		</div>
+</div>

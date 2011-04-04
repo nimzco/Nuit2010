@@ -1,0 +1,15 @@
+<% url = "http://maps.google.com/maps/api/staticmap?center='"+map_static.address+"'"
+	url += "&amp;zoom="+map_static.zoom.to_s+"&amp;size="+(is_mobile? ? '300' : '640')+"x"+(is_mobile? ? '300' : '640')+"&amp;maptype=hybrid"
+	alpha = 'A'
+	map_static.google_markers.each { |marker| url += "&amp;markers=color:"+marker.color+"|label:"+alpha+"|"+marker.address; alpha = (alpha == 'Z' ? 'A' : alpha.next) }
+	url += "&amp;sensor=false" -%>
+
+<img width="300" height="300" id="map_canvas_static" src="<%= url -%>" alt="<%= map_static.title -%>. Carte de : <%= map_static.address -%>"/>
+
+<% alpha = 'A' -%>
+<ul>
+	<% map_static.google_markers.each do |marker| -%>
+		<li style="list-style-image:url('/images/<%= marker.color -%>-dot.gif')"><b><%= alpha -%></b> : <%= marker.title -%></li>
+		<% alpha = (alpha == 'Z' ? 'A' : alpha.next) -%>
+	<% end -%>
+</ul>

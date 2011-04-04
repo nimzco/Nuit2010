@@ -1,0 +1,72 @@
+<h3>
+<% if current_user.name != ""%>
+	<%= h current_user.name -%>
+<% else %>
+	<%= h current_user.login -%>
+<% end %>
+</h3>
+<%= render(:partial => "rates/poly_rates" , :object => {:rates => current_user.rates, :user_id => current_user.id} ) %>
+
+<h4>Mes propositions</h4>
+
+<h5>Mes proposition pour être conducteur</h5>
+
+<% if current_user.driver_requests.size() > 0 %>
+	<ul>
+	<% current_user.driver_requests.each do |request| %>
+		
+			<li class="<%= (!request.trip.driver.nil? && request.trip.driver.id == current_user.id) ? "accepted" : "rejected" %>"><%= link_to "Départ :" + request.trip.start_address + "  -  " + "Arrivée : " + request.trip.end_address, :controller => 'trips', :action => 'show', :id => request.trip.id %></li>
+		
+	<% end %>
+	</ul>
+<% end %>
+
+<h5>Mes proposition d'étape</h5>
+<% if current_user.step_requests.size() > 0 %>
+	<ul>
+	<% current_user.step_requests.each do |request| %>
+		
+			<% res = false %>
+			<% request.trip.steps.each do |step| %>
+				<% if request.step_address == step.step_address %>
+					<% res = true %>
+				<% end %>
+			<% end %>
+			<li class="<%= res ? "accepted" : "rejected" %>"><%= link_to "Départ :" + request.trip.start_address + "  -  " + "Arrivée : " + request.trip.end_address, :controller => 'trips', :action => 'show', :id => request.trip.id %></li>
+		
+	<% end %>
+	</ul>
+<% end %>
+
+<h4>Leurs propositions</h4>
+
+<h5>Proposition pour être conducteur</h5>
+<% if @other_driver_requests.size() > 0 %>
+	<ul>
+	<% @other_driver_requests.each do |request| %>
+			<li class="<%= (!request.trip.driver.nil? && request.trip.driver.id == current_user.id) ? "accepted" : "rejected" %>">
+				<%= link_to "Départ :" + request.trip.start_address + "  -  " + "Arrivée : " + request.trip.end_address, :controller => 'trips', :action => 'accept_driver', :id => request.id %>
+			</li>
+	<% end %>
+	</ul>
+<% end %>
+
+<h5>Mes proposition d'étape</h5>
+<% if @other_step_requests.size() > 0 %>
+	<ul>
+	<% @other_step_requests.each do |request| %>
+		
+			<% res = false %>
+			<% request.trip.steps.each do |step| %>
+				<% if request.step_address == step.step_address %>
+					<% res = true %>
+				<% end %>
+			<% end %>
+			<li class="<%= res ? "accepted" : "rejected" %>"><%= link_to "Départ :" + request.trip.start_address + "  -  " + "Arrivée : " + request.trip.end_address, :controller => 'trips', :action => 'accept_step', :id => request.id %></li>
+		
+	<% end %>
+	</ul>
+<% end %>
+
+
+

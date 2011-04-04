@@ -1,0 +1,26 @@
+<!--
+geocoder.geocode( { 'address': "<%= marker.address -%>"}, function(results, status) {
+	if (status == google.maps.GeocoderStatus.OK) {
+
+		var marker<%= marker.id -%> = new google.maps.Marker({
+			clickable: true,
+			draggable: false,
+			flat: true,
+			map: map,
+			icon: 'url(\'/images/<%= marker.color -%>-dot.gif',
+			position: results[0].geometry.location,
+			title: "<%=h marker.title -%>"
+		});
+
+		google.maps.event.addListener(marker<%= marker.id -%>, "click", function() {
+				new google.maps.InfoWindow({
+					content: '<div id="content-marker"><div id="siteNotice"></div>'+
+						"<h5><%=h marker.title -%></h5>"+
+						'<div id="bodyContent">'+
+						"<%=h marker.description -%>"+
+						"</div></div>"
+				}).open(map,marker<%= marker.id -%>);
+			});
+	}
+});
+//-->

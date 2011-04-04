@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  start_address: MyString
+  end_address: MyString
+  on_demand: false
+  start_date: 2010-12-03 01:58:02
+  end_date: 2010-12-03 01:58:02
+  seat: 1
+
+two:
+  user_id: 1
+  start_address: MyString
+  end_address: MyString
+  on_demand: false
+  start_date: 2010-12-03 01:58:02
+  end_date: 2010-12-03 01:58:02
+  seat: 1

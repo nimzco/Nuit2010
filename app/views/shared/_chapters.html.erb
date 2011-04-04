@@ -1,0 +1,7 @@
+<div>
+	<% chapters.each do |chapter| %>
+		<a href="#<%= chapter %>"><%= chapter %></a>
+	<% end %>
+</div>
+
+<% #exemple d'utilisation 	    		<%= render :partial => 'shared/chapters', :collection => ['test', 'jh', 'kjh'] -%>

@@ -1,0 +1,16 @@
+<h2>Liste des comunautés</h2>
+<div id="list-trips">
+<ul>
+<% @comunities.each do |comunity| %>
+  <li>
+  	<div class="trajet-div-list">
+  		<p><%= link_to comunity.name, :controller => 'comunities', :action => 'show', :id => comunity.id %></p>
+  		<p><em>Adresse :</em><%=h comunity.address %><br/><br/>
+ 		<%=h comunity.description %>
+   		</p>
+  	</div>
+    </li>
+<% end %>
+</ul>
+</div>
+<%= render 'shared/line_navigation' -%>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  trip_id: 1
+  step_address: MyString
+
+two:
+  user_id: 1
+  trip_id: 1
+  step_address: MyString

@@ -1,0 +1,43 @@
+<div id='rate<%= poly_rates[:user_id].to_s %>' >
+	<p class='average-rate'>
+
+		Avis : 
+		<% sum = 0.0 
+			res = false
+			user_id = logged_in? ? current_user.id : 0
+			my_score = 0 %>
+			<% poly_rates[:rates].each do |r| %>
+				<% sum += r.rate  %>
+				<% if r.authorid == user_id %>
+					<% res = true
+						my_score = r.rate %>
+				<% end %>
+			<% end %>
+		<% if sum >= 1 %>
+			<b><%= (h sum / poly_rates[:rates].size.to_f).to_f.round(1) %></b>
+			(<%= pluralize(poly_rates[:rates].size.to_f, "vote") %>)
+		<% else %>
+			Pas de votes !
+		<% end %>
+
+	</p>
+	<% if logged_in? && (poly_rates[:user_id] != current_user.id) %>
+		<% if !res  %>
+			<p class='rate-it'>
+				<% [1,2,3,4,5].each do |score| %>
+					<%=h link_to image_tag('star.png', :class => 'star'), :controller => 'rates', :action => 'rate_it', :id => 1, :score => score.to_s, :user_id => poly_rates[:user_id] %>
+				<% end %>
+			</p>
+		<% else %>
+			<p class='rate-it'>
+				<% (1..my_score).each do |score| %>
+					<%=h link_to image_tag('star.png', :class => 'star'), :controller => 'rates', :action => 'edit_rate_it', :id => 1, :score => score.to_s, :user_id => poly_rates[:user_id] %>
+				<% end %>
+				<% my_score += 1 %>
+				<% (my_score..5).each do |score| %>
+					<%=h link_to image_tag('no_star.png', :class => 'star'), :controller => 'rates', :action => 'edit_rate_it', :id => 1, :score => score.to_s, :user_id => poly_rates[:user_id] %>
+				<% end %>
+			</p>
+		<% end %>
+	<% end %>
+</div>

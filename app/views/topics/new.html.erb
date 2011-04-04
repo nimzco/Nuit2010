@@ -1,0 +1,23 @@
+<fieldset>
+<legend>Nouveau sujet</legend>
+
+<% form_for(@topic) do |f| -%>
+  <%= f.error_messages :header_message => "Le formulaire n'a pas &eacute;t&eacute; correctement rempli", :message => "" -%>
+
+  <p>
+    <%= f.label :title -%><br />
+    <%= f.text_field :title -%>
+  </p>  
+   <p>
+    <%= f.label :description -%><br />
+    <%= f.text_area :description -%>
+  </p>
+
+   <%= f.hidden_field :forum_id, :value => params[:forum_id] -%>
+  <p>
+    <%= f.submit 'Create' -%>
+  </p>
+
+<% end -%>
+</fieldset>
+<%= link_to 'Back', :controller => 'Forums', :action => @topic.id%>

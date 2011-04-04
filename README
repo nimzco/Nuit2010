@@ -1,0 +1,6 @@
+Pour l'authentification il faut installer :
+	cd vendor/plugins
+	git clone https://github.com/technoweenie/restful-authentication.git restful_authentication
+
+Pour la recherche :
+	sudo gem install acts_as_ferret

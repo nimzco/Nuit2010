@@ -1,0 +1,723 @@
+
+/*---------------------------------------------------------------------------------------------- Fonts -------------------------*/
+/*--------------------- HelveticaNeue ---------------------*/
+@font-face {
+	font-family: "HelveticaNeue";
+	src: url('fonts/HelveticaNeue.ttf');
+}
+
+@font-face {
+	font-family: "HelveticaNeue";
+	font-style: italic;
+	src: url('fonts/HelveticaNeue-Italic.ttf');
+}
+
+@font-face {
+	font-family: "HelveticaNeue";
+	font-style: bold;
+	src: url('fonts/HelveticaNeue-Bold.ttf');
+}
+
+@font-face {
+	font-family: "HelveticaNeue";
+	font-style: bold;
+	font-style: italic;
+	src: url('fonts/HelveticaNeue-BoldItalic.ttf');
+}
+
+/*--------------------- HelveticaNeue-UltraLight ---------------------*/
+@font-face {
+	font-family: "HelveticaNeue-UltraLight";
+	src: url('fonts/HelveticaNeue-UltraLight.ttf');
+}
+
+@font-face {
+	font-family: "HelveticaNeue-UltraLight";
+	font-style: italic;
+	src: url('fonts/HelveticaNeue-UltraLightItalic.ttf');
+}
+
+/*--------------------- HelveticaNeue-Light ---------------------*/
+@font-face {
+	font-family: "HelveticaNeue-Light";
+	src: url('fonts/HelveticaNeue-Light.ttf');
+}
+
+@font-face {
+	font-family: "HelveticaNeue-Light";
+	font-style: italic;
+	src: url('/fonts/HelveticaNeue-LightItalic.ttf');
+}
+
+/*--------------------- Optima ---------------------*/
+@font-face {
+	font-family: "Optima";
+	src: url('fonts/Optima-Regular.ttf');
+}
+
+@font-face {
+	font-family: "HelveticaNeue-Light";
+	font-style: italic;
+	src: url('/fonts/HelveticaNeue-LightItalic.ttf');
+}
+/*---------------------------------------------------------------------------------------------- Reset CSS ---------------------*/
+
+/*---------------------------------------------------------------------------------------- Fin du Reset CSS --------------------*/
+
+html {
+/* 	background-color: black; */
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: "Verdana", "Geneva", "Arial", "Helvetica", 'Bitstream Vera Sans', sans-serif;
+	background: url(../images/bg-car3.jpg);
+	background-repeat: no-repeat;
+	background-color: #ecf6fd;
+	background-position-x: left;
+	background-position-y: bottom; 
+	background-attachment: fixed;
+}
+
+body {
+	margin: auto;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding: 0;
+	height: 100%;
+}
+
+fieldset {
+/* 	max-width: 500px; */
+	padding-left: 1em;
+	padding-right: 1em;
+	border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	background-color: #ecf6fd;
+	border: 1px solid #6fc4fb;
+	text-align: justify;
+	margin: auto;
+}
+
+/*---------------------------------------------------------------------------------------------- Titre ---------------------------*/
+
+h1 {
+	padding-top: 1.55em;
+	float: left;
+	padding-left: 10%;
+	font-size: 300%;
+	text-align: center;
+	color: #E9E2C9;
+	font-family: "HelveticaNeue-Light";
+	letter-spacing: 0.2em;
+	margin: auto;
+}
+
+p, h2, h3, h4, h5, h6, dl, ul, form, #loginGauche, #profile-content, #comunity-show, .comment {
+	text-align: justify;
+/* 	max-width: 600px; */
+	margin: auto;
+}
+
+h2, h3, h4, h5, h6 {
+	text-align: center;
+	color: #261C13;
+	background-color: #ecf6fd;
+	border: 1px solid #6fc4fb;
+	border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	margin-top: 1.5em;
+	margin-bottom: 0.75em;
+	font-weight: normal;
+}
+
+h2 {
+	margin-top: 1em;
+	font-size: 200%;
+	padding: 2%;
+}
+
+h3 {
+	font-size: 150%;
+	padding: 1%;
+	padding-bottom: 0.5%;
+	padding-top: 0.5%;
+}
+
+h4 {
+	font-size:125%;
+}
+
+form {
+	margin-top: 1%;
+}
+
+/*---------------------------------------------------------------------------------------------- Lien globaux --------------------*/
+
+a {
+	font-family: "HelveticaNeue-Light";
+	color: #1e59bf;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #0c37f2;
+	text-decoration: underline;
+}
+
+a:focus {
+	padding: 2px;
+	outline: 1px solid white;
+	color: white;
+	background-color: black;
+}
+
+dl {
+	margin-top: 1%;
+}
+
+ul {
+	list-style-image: url(../images/dotblue.png);
+}
+
+dl dt {
+	margin-top: 1%;
+	font-size: 105%;
+	font-variant: small-caps;
+}
+
+dl dt:after {
+	content: " :";
+}
+
+/*---------------------------------------------------------------------------------------------- Menu et lien --------------------*/
+
+#menu-wrap {
+	margin-top: 0;
+	margin-bottom: 1em;
+	padding: 0;
+}
+
+ul#menu li{
+	display: inline;
+	margin-right: 0.5em;
+	padding: 0;
+}
+
+ul#menu {
+	padding-bottom: 0.3em;
+	padding-top: 0.3em;
+	font-family: "HelveticaNeue";	
+	background-color: #eefde4;
+	border: 1px solid #53b90f;
+	border-top: none;
+	margin: auto;
+	display: block;
+	font-size: 120%;
+	border-radius: 0 0 0.5em 0.5em;
+	-moz-border-radius: 0 0 0.5em 0.5em; 
+	-webkit-border-radius: 0 0 0.5em 0.5em; 
+}
+
+ul#menu li a {
+	font-family: "HelveticaNeue-Light";
+	color: #35670e;
+	text-decoration: none;
+}
+
+ul#menu li a:hover {
+	color: #261C13;
+	text-decoration: underline;
+}
+
+#col1-content ul {
+	margin: 0;
+	padding-left: 20px;
+}
+
+/*-------------------- Animation du menu --------------------*/
+
+/*-------------------- Fin Animation --------------------*/
+
+
+#fb_login_button {
+	padding-top: 0.3em;
+	background-color: #ecf6fd;
+	border: 1px solid #6fc4fb;	
+	text-align: center;
+	border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+}
+
+/*---------------------------------------------------------------------------------------------- Taille site ---------------------*/
+
+#wrapper, ul#menu, #content-wrapper, #teaser {
+	min-width:400px;
+	max-width:55em;
+	margin: auto;
+}
+
+/*---------------------------------------------------------------------------------------------- Header -------------------------*/
+
+#topnav {
+	position:absolute;
+	left:50%;
+	top: 10px;
+	text-align:right;
+	color:white;
+	background:transparent;
+}
+
+#topnav a, #evitement a {
+	color: #e9e2c9;	
+}
+
+#evitement {
+	position: absolute;
+	min-width: 30%;
+	top: 10px;
+	left: 10px;
+}
+/*
+
+#topnav a:hover, #evitement a:hover {
+	color: #a9a289;
+}
+*/
+
+a.genericPerson {
+	background: url(../images/genericPerson.png) no-repeat top left;
+	padding-left: 30px;
+	padding-top: 0.48em;
+}
+
+a.genericPerson:hover {
+	background: url(../images/genericPerson-flou.png) no-repeat top left;
+}
+
+
+#header-wrap {
+	background: url(../images/header-bg.jpg);
+	background-color: #261C13;
+	color: white;
+}
+
+#header {
+	color: white;
+	background: url(../images/header-center.jpg) bottom center no-repeat;
+	background-color: #261C13;
+	min-height: 12em;
+}
+
+#teaser {
+	clear:both;
+	margin: 0 0 1em 0;
+	padding: 0 0 1em 0;
+	border-bottom: 1px solid #EEE;
+}
+
+#wrapper {
+	margin-bottom: 1em;
+}
+
+#content-wrapper {
+	overflow: auto;
+	padding: 1em;
+	margin: auto;
+	background-color: white;
+	border: 1px solid #261C13;
+	border-bottom: none;
+	border-radius: 0.3em 0.3em 0 0;
+	-moz-border-radius: 0.3em 0.3em 0 0;
+	-webkit-border-radius: 0.3em 0.3em 0 0;
+}
+
+#col1-left {
+	float:left;
+	width:15%; /* Penser à changer le margin de col2-right */
+}
+
+#col2-right {
+	width:auto;
+	/* margin:0 0 0 15%;  *//* Penser à changer le width de col1-left */
+/* 	border-left: 1px solid #EEE; */
+}
+
+#col1-content {
+	padding:0 10px 0 10px;
+}
+
+#col2-content {
+	padding:0 10px 0 10px;
+}
+
+#footer {
+	padding:10px 20px;
+	clear: both;
+	color: #261C13;
+	border: 1px solid #261C13;
+	border-top-color: #EEE;
+	background-color: white;
+	border-radius: 0 0 0.3em 0.3em;
+	-moz-border-radius: 0 0 0.3em 0.3em;
+	-webkit-border-radius: 0 0 0.3em 0.3em;
+}
+
+/*---------------------------------------------------------------------------------------------- Page login ----------------------*/
+
+#loginGauche {
+	padding: 1.5%;
+/* 	background-color: #eefde4; */
+	border: 1px solid #53b90f;
+	border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+}
+
+#loginGauche > p:first-child:after {
+	content: " :";
+}
+/*---------------------------------------------------------------------------------------------- Formulaire ----------------------*/
+
+label:after { 
+	content: ' :'; 
+}
+
+label {
+/* 	font-variant: small-caps; */
+	font-size: 105%;
+}
+
+textarea {
+	width: 70%;
+	margin: auto;
+	height: 6em;
+}
+
+form p {
+	margin-top: 0.5em;
+}
+
+.errorExplanation {
+	border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	padding: 0.5em;
+	font-family: "HelveticaNeue-Light";
+	background-color: #f7dede;
+	border: 1px solid #b92c08;
+	text-align: left;
+}
+
+.fieldWithErrors label {
+	color: red;
+}
+
+.fieldWithErrors {
+	background-color: #f7dede;
+	border: 1px solid #b92c08;
+	padding: 2px;
+	border-radius: 0.2em;
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+}
+
+/*---------------------------------------------------------------------------------------------- Notice Error --------------------*/
+
+#notice, #error {
+	color: black;
+	border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	font-size: 110%;
+	min-width: 3em;
+	text-align: center;
+	font-family: "HelveticaNeue-Light";
+	padding: 0.5em;
+	float: right;
+	margin: 0.5em;
+	position: absolute;
+	right: 0;
+}
+
+#notice {
+	background-color: #eefde4;
+	border: 1px solid #53b90f;
+}
+
+#error {
+	background: url(../images/ProblemReporter.png) no-repeat 5px 50%;
+	background-color: #f7dede;
+	padding-left: 45px;
+	border: 1px solid #b92c08;
+	text-align: center;
+}
+
+ul#topics_list {
+	margin: auto;
+	padding: 0;
+}
+
+ul#topics_list li:nth-child(odd) {
+	background-color: #ecf6fd;
+}
+
+ul#topics_list li {
+	border: 1px solid #6fc4fb;
+	margin: 0;
+	list-style: none;
+	padding: 0.2em;
+	margin: 0.4em;
+	border-radius: 0.2em;
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+}
+
+
+
+.helpme, .note, .warning {
+	padding: 1%;
+	padding-left: 70px;
+/* 	max-width: 530px; */
+	border-radius: 0.4em;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	text-align: left;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+.helpme {
+	background: url(../images/helpme.png) no-repeat 1% 50%;
+	background-color: #eefde9;
+	border: 1px solid #41e443;
+}
+
+
+.note {
+	background: url(../images/note3.png) no-repeat 1% 50%;
+	background-color: #fefcd2;
+	border: 1px solid #f9d840;
+}
+
+.warning {
+	background: url(../images/warning.png) no-repeat 1% 50%;
+	background-color: #f9e1e0;
+	border: 1px solid #c52f24;
+}
+/*----------------------------------------------------------------------------------------------  --------------------*/
+
+
+#map_canvas.maps-desktop{
+	border: 2px solid #261C13;
+	-webkit-border-radius: 0.5em;
+	margin: auto;
+	margin-top: 1em;
+	width: 100%;
+	height: 30em;
+}
+
+#map_canvas.maps-mobile {
+	width:100%; 
+	height: 15em;
+}
+
+.exemple-adresse {
+	color: #7ab964;
+	font-style: italic;
+}
+
+p.line-navigation {
+	width: 100%;
+	margin: 1%;
+}
+
+/*---------------------------------------------------------------------------------------------- QuickSearch --------------------*/
+
+#quick-search-trip, #quick-search-com {
+	padding: 1%;
+	overflow: auto;
+	border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	background: url(../images/bg-quick.png) repeat-x;
+	background-position-y: 0%;
+	background-color: #0a9bed;
+
+}
+
+#quick-search-trip form, #quick-search-com form {
+	max-width: 100%;
+	background-color: transparent;
+	border: none;
+	overflow: auto;
+	margin: auto;
+	border: none;
+	width: 100%;
+}
+
+#quick-search-trip fieldset legend, #quick-search-com fieldset legend {
+	text-align:center;
+	font-size: 150%;
+}
+
+#quick-search-trip form input[type=submit] {
+	margin-top: 2.15em;
+/* 	float: right; */
+}
+
+#quick-search-trip form label, #quick-search-com form label{
+	font-variant: normal;
+}
+
+#quick-search-trip p, #quick-search-com p{
+	color: white;
+	float: left;
+	padding: 0.3em;
+	margin-right: 0.5em;
+	border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+}
+
+#quick-search-trip p:last-child, #quick-search-com p:last-child {
+	margin-right: 0;
+}
+
+#quick-search-trip fieldset#tripfield, #quick-search-com fieldset#comfield {
+	background-color: transparent;
+	border: none;
+	max-width: 100%;
+}
+
+.clear {
+	clear: both;
+}
+
+#profile-content #map_canvas{
+	border: 2px solid black;
+	-moz-border-radius: 0.6em;
+	-webkit-border-radius: 0.6em;
+	width: 99%;
+}
+
+#profile-information, #comunity-desc {
+	background-color: #ecf6fd;
+	border: 1px solid black;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	width: auto;
+/* 	margin-right: 40%; */
+	padding: 1%;
+	margin-bottom: 1%;
+}
+
+#profile-photo {
+	float: right;
+	background-color: #fefcd2;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	-moz-border-radius-topleft: 0.4em;
+	-moz-border-radius-topright: 0.4em;
+	-webkit-border-top-left-radius: 0.4em;
+	-webkit-border-top-right-radius: 0.4em;
+	width: 40%;
+}
+
+#list-trips ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+#list-trips .trajet-div-list {
+	margin-top: 2%;
+	overflow: auto;
+	border: 1px solid #6fc4fb;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	background-color: #ecf6fd;
+}
+
+#list-trips .trajet-div-list > p:first-child{
+	text-align: center;
+	padding: 1%;
+	background-position-y: 0%;
+	background-color: #daecfa;
+	-moz-border-radius-topleft: 0.4em;
+	-moz-border-radius-topright: 0.4em;
+	-webkit-border-top-left-radius: 0.4em;
+	-webkit-border-top-right-radius: 0.4em;
+}
+
+#list-trips .trajet-div-list > p:last-child{
+	padding: 1%;
+}
+
+table {
+	border: 1px solid #daecfa;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table tr td, table th{
+	border: 1px solid #daecfa;
+}
+
+#comunity-show #map_canvas, .map-center {
+	border: 2px solid black;
+	-moz-border-radius: 0.6em;
+	-webkit-border-radius: 0.6em;
+	width: 99%;
+/* 	max-width: 600px; */
+	margin: auto;
+}
+
+#content-marker {
+	color: black;
+	margin: 0;
+}
+
+.comment {
+	margin-top: 2%;
+	overflow: auto;
+	border: 1px solid #6fc4fb;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	background-color: #ecf6fd;
+}
+
+.comment > p:first-child{
+	text-align: center;
+	background-position-y: 0%;
+	background-color: #daecfa;
+	-moz-border-radius-topleft: 0.4em;
+	-moz-border-radius-topright: 0.4em;
+	-webkit-border-top-left-radius: 0.4em;
+	-webkit-border-top-right-radius: 0.4em;
+}
+
+.comment p.message{
+	padding: 1%;
+}
+
+#presentation li{
+	margin-bottom: 1%;
+}
+
+li.accepted {
+	background-color: #c5ffb1;
+}
+
+#capture-ecran img {
+	display: block;
+	margin: auto;
+	margin-top: 1em;
+}
+
+#capture-ecran a {
+	text-align: center;
+	display: block;
+	margin: auto;
+}

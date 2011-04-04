@@ -1,0 +1,67 @@
+<%
+	## Similar to _table.html.erb
+%>
+
+<% if !line_chart.nil? -%>
+	<% if !is_mobile? -%>
+		<script src="https://www.google.com/jsapi" type="text/javascript"></script>	
+		<div id="visualization-lineChart"></div>		
+		<script type="text/javascript">
+      google.load("visualization", "1", {packages:["linechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+
+
+				<%= render :partial => 'column', :collection => line_chart.headers -%>
+
+			  <% 
+			  	#@cellInformation = [['John', 1000, true], ['Mary', 25000, true], ['Paul', 4000, false]] 
+			  -%>
+
+				<%= render :partial => 'data_value', :object => line_chart -%>
+				
+        var chart = new google.visualization.LineChart(document.getElementById('visualization-lineChart'));
+        chart.draw(data, {width: 400, height: 240, title: '<%= line_chart.title -%>',
+                          hAxis: {title: '<%= line_chart.axis_title -%>', titleTextStyle: {color: 'red'}},
+													colors: ['#c8bb95','#8b785a','#4d351f']
+                         });
+      }
+    </script>	
+ 		<%= render 'html_table', :object => line_chart -%>
+	<% end -%>
+	<% if !is_mobile? -%>
+		<noscript>
+	<% end %>		
+	<% ## If width < 600 show width else show 600x500	           
+		if line_chart.number_of_row * 100 + 80 < 600 
+				@width = (line_chart.number_of_row * 100 + 80).to_s
+				@height = (line_chart.number_of_row * 75).to_s
+		else
+				@width = '600'
+				@height = '500'
+		end		           
+	%>
+
+	<div id="image_statistics">
+		<%= image_tag Gchart.line( :title => line_chart.title,
+									           :data => line_chart.data_per_column, 
+									           :bar_colors => 'c8bb95,8b785a,4d351f',
+									           ## If width < 600 show width else show 600x500
+									           :stacked => false, 
+									           :size => @width + 'x' + @height,
+									           :legend => 	line_chart.header_names,
+														 :bar_width_and_spacing => {:width => 30, :spacing => 1, :group_spacing => 0},
+									           :axis_with_labels => ['x','y'],
+								             :axis_labels => [line_chart.x_label],
+								             :max_value => line_chart.max_value,
+								             :min_value => 0) + '&chof=gif', :alt => "", :width => @width, :height => @height
+		%>
+		</div>
+ 		<%= render 'html_table', :object => line_chart -%>
+	<% if !is_mobile? -%>
+		</noscript>
+	<% end %>
+<% else -%>
+	<p>Data display problem</p>
+<% end -%>

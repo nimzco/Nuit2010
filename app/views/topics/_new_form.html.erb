@@ -1,0 +1,30 @@
+<li id="temporary_form">
+	<div >
+		<h2>New topic</h2>
+		<fieldset>
+		<legend>Ajouter un sujet</legend>
+		<% remote_form_for :topic, 
+											 :url => { :action => 'create' },
+											 :update => 'topics_list' ,
+											 :position => :bottom,
+											 :complete => "$j('#temporary_form').remove();" do |f| -%>
+	
+			  <%= f.error_messages :header_message => "Le formulaire n'a pas &eacute;t&eacute; correctement rempli", :message => "" -%>
+		  <p>
+		    <%= f.label :title -%><br />
+		    <%= f.text_field :title -%>
+		  </p>  
+		   <p>
+		    <%= f.label :description -%><br />
+		    <%= f.text_area :description -%>
+		  </p>
+		
+		   <%= f.hidden_field :forum_id, :value => params[:forum_id] -%>
+		  <p>
+		    <%= f.submit 'Create' -%>
+		  </p>
+		
+		<% end -%>
+		</fieldset>
+	</div>
+</li>

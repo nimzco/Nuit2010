@@ -1,0 +1,15 @@
+<h2>Liste de tous les forums</h2>
+<div id="forum_list">
+	<%= render :partial => 'forum', :collection => @forums -%>
+</div>
+<%	if logged_in? -%>
+	<div class="new_forum">
+	<% form_remote_tag :url => { :controller => 'forums', :action => 'show_create_forum_form' },
+										 :update => 'forum_list',
+										 :before => "if ($j('#temporary_form') != null) { $j('#temporary_form').remove();}",
+										 :position => :bottom  do |form| -%>
+		<%= submit_tag 'Create a new forum' -%>
+	<% end -%>
+	</div>
+<% end -%>
+<%= render 'shared/line_navigation' -%>

@@ -1,0 +1,6 @@
+data.addRows(<%= h data_cell.number_of_lines -%>);	    
+<% data_cell.lines.each_with_index do |cell, i| -%>
+	  <% cell.each_with_index do |cellData, j|%>
+	  		data.setCell(<%= h i -%>, <%= h j -%>, <% if cellData.class == String -%><%= h "'" + cellData + "'" -%><% else -%><%= h cellData -%><% end -%>);	
+		<% end -%>
+<% end -%>

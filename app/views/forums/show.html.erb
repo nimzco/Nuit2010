@@ -1,0 +1,27 @@
+<h2><%=h @forum.name -%></h2>
+<p>
+  <b>Description:</b>
+  <%=h @forum.description -%>
+</p>
+
+<h3>Sujets</h3>
+
+<ul id="topics_list">
+	<%= render :partial => 'topics/topic', :collection => @topics -%>
+</ul>
+
+
+<%	if logged_in? -%>
+	<% form_remote_tag :url => { :controller => 'Topics', :action => 'show_new_form', :forum_id => @forum.id},
+										 :update => 'topics_list',
+										 :before => "if ($j('#temporary_form') != null) {$j('#temporary_form').remove();}",
+										 :position => :bottom  do |form| -%>
+		<%= submit_tag 'Create a new topic' -%>
+	<% end -%>
+
+	<% if @forum.user_id == session[:user_id] -%>
+		<%= link_to 'Edit', edit_forum_path(@forum) -%> |
+	  <%= link_to 'Delete this forum', :controller => 'Forums', :action => 'destroy', :confirm => 'Are you sure?', :id => @forum.id -%>
+	<% end -%>
+<% end -%>
+	<%= render 'shared/line_navigation' -%>

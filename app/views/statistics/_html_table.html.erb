@@ -1,0 +1,12 @@
+<table id="table_statistics" summary="<%= h html_table.summary -%>">
+<!--
+   <caption>
+      <%= h html_table.caption -%>
+   </caption>
+-->
+   	<tr><% html_table.headers.each do |column_information| -%><th><%= h column_information[:name] -%></th><% end -%></tr>
+		<% html_table.lines.each_with_index do |cell, i| -%>
+      <tr><% cell.each_with_index do |cellData, j|%><td><%= h cellData -%></td><% end -%></tr>
+		<% end -%>         
+</table>
+

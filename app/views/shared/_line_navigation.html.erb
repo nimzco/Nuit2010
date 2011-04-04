@@ -1,0 +1,52 @@
+<p class="line-navigation" ><a href='/'>Accueil</a>
+<% actions=['index', 'show'] -%>
+
+<% case params[:controller]
+	when 'forums' -%>
+		> <%= link_to 'Forum', :controller => 'forums' -%>
+		<% if params[:action] == 'show' || params[:action] == 'edit' -%>
+			<% forum = Forum.find(params[:id]) -%>
+			> <%= link_to forum.name, :controller => 'forums', :action => 'show', :id => forum.id -%>
+		<% end -%>
+
+
+	<% when 'topics' -%>
+		> <%= link_to 'Forum', :controller => 'forums' -%>
+		<% if params[:action] == 'show' || params[:action] == 'edit' -%>
+			<% topic = Topic.find(params[:id]) -%>
+			> <%= link_to topic.forum.name, :controller => 'forums', :action => 'show', :id => topic.forum.id -%>
+			> <%= link_to topic.title, :controller => 'topics', :action => 'show', :id => topic.id -%>
+		<% end -%>
+	
+	<% when 'trips' -%>
+		> <%= link_to 'Trajet', :controller => 'trips' -%>
+		<% if params[:action] == 'show' || params[:action] == 'edit' -%>
+			<% trip = Trip.find(params[:id]) -%>
+			> <%= link_to "Départ : " + trip.start_address + "  -  " + "Arrivée : " + trip.end_address, :controller => 'trips', :action => 'show', :id => trip.id -%>
+		<% elsif params[:action] == 'search' %>
+			> <%= link_to "Recherche", :controller => 'trips', :action => 'search'-%>
+		<% end -%>
+		
+	<% when 'comunities' -%>
+		> <%= link_to 'Comunautés', :controller => 'comunities' -%>
+		<% if params[:action] == 'show' || params[:action] == 'edit' -%>
+			<% comunity = Comunity.find(params[:id]) -%>
+			> <%= link_to comunity.name, :controller => 'comunities', :action => 'show', :id => comunity.id -%>
+		<% end -%>
+		
+	<% when 'statistics' -%>
+		> <%= link_to 'Statistiques', :controller => 'statistics' -%>
+		<% if params[:action] == 'offre_demande' -%>
+			> <%= link_to "Offre et demande", :controller => 'statistics', :action => 'offre_demande'-%>
+		<% elsif params[:action] == 'taux_de_remplissage' %>
+			> <%= link_to "Taux de remplissage", :controller => 'statistics', :action => 'taux_de_remplissage'-%>
+		<% elsif params[:action] == 'nombre_trajet_par_communaute' %>
+			> <%= link_to "Nombre de trajet par communauté", :controller => 'statistics', :action => 'nombre_trajet_par_communaute'-%>
+		<% elsif params[:action] == 'nombre_inscrit_par_communaute' %>
+			> <%= link_to "Nombre d'inscrits par communauté", :controller => 'statistics', :action => 'nombre_inscrit_par_communaute'-%>
+		<% end -%>
+
+	<% else -%>
+<% end -%>
+
+</p>

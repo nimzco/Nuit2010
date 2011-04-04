@@ -1,0 +1,9 @@
+<div class="comment">
+	<p class="user"><%= link_to comment_div.author.login, :controller => 'users', :action => 'profile', :id => comment_div.author.id %></p>
+	<p class="message">
+		<%=h comment_div.message %>
+	</p>
+	<% if  logged_in? && (current_user.type == 'Admin' || current_user.id == comment_div.authorid) -%>
+		<%= button_to 'Supprimer', {:controller => 'comments', :action => 'destroy', :id => comment_div.id}, :confirm => 'Voulez-vous vraiment supprimer ce commentaire ?', :method => :delete %>
+	<% end -%>
+</div>

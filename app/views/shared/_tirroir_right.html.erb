@@ -1,0 +1,14 @@
+<script type="text/javascript">
+	$j(document).ready(function() {
+			showAndHideMe('#<%= tirroir_right[:wrapper_id] -%>.tirroir-right', '#<%= tirroir_right[:button_id] -%>', 'tirroir-right-non-animate', 'tirroir-right-animate', 'tirroir-right-ferme', 'tirroir-right-sorti', 'fleche-droite', '#<%= tirroir_right[:button_id_supp] -%>'  );});
+</script>
+<div id="<%= tirroir_right[:wrapper_id] -%>" class="tirroir-right tirroir-right-ferme tirroir-right-non-animate">
+	<div class="tirroir-right-button" id="<%= tirroir_right[:button_id] -%>" >
+		<div></div>
+	</div>
+	<div class="tirroir-right-wrapper">
+		<div class="tirroir-right-content">
+			<div><%= tirroir_right[:content] -%></div>
+		</div>
+	</div>
+</div>

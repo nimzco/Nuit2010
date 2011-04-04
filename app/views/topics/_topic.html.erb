@@ -1,0 +1,4 @@
+<li>
+	<%= link_to topic.title, :controller => 'Topics', :action => topic.id%><br/>
+	Description: <%= h topic.description.to(100) + '...' -%>
+</li>

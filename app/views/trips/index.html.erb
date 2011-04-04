@@ -1,0 +1,22 @@
+<h2>Liste des trajets</h2>
+<div id="list-trips">
+<ul>
+<% @trips.each do |trip| %>
+  <li>
+  	<div class="trajet-div-list">
+  		<p><%= link_to "Départ :" + trip.start_address + "  -  " + "Arrivée : " + trip.end_address, :controller => 'trips', :action => 'show', :id => trip.id %></p>
+  		<p>
+  			<%if !trip.on_demand? %>
+ 				Conducteur : <%= link_to User.find_by_id(trip.user_id).login, :controller => 'users', :action => 'profile', :id => trip.user_id %><br/>
+ 			<% else %>
+ 				Passager : <%= link_to User.find_by_id(trip.user_id).login, :controller => 'users', :action => 'profile', :id => trip.user_id %><br/>
+ 			<% end %>
+ 			Le : <%=h trip.start_date.to_s(:long) %><br/>
+ 			Nombre de places restantes : <%=h trip.seat %>
+   		</p>
+  	</div>
+    </li>
+<% end %>
+</ul>
+</div>
+<%= render 'shared/line_navigation' -%>

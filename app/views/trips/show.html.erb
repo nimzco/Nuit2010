@@ -1,0 +1,137 @@
+<% if is_mobile? %>
+	<p class="note">Touchez la zone rouge a droite de votre écran pour afficher la carte</p>
+<% end %>
+
+<% if @trip.driver.nil? %>
+	<h3>Demande de trajet de <%= link_to @trip.users[0].login, :controller => "users", :action => "profile", :id => @trip.users[0].id %></h3>
+<% else %>
+	<h3>Trajet de <%= link_to @trip.driver.login, :controller => "users", :action => "profile", :id => @trip.driver.id %></h3>
+<% end %>
+<div class="trajet-div-list">
+	<% if is_mobile? %>
+				<div id="profile_rjs"></div>
+		<%end%>
+	<p>Lieu de départ : <%= @trip.start_address %><br/>
+	Lieu d'arrivée : <%= @trip.end_address %></p>
+	<p>
+		<%if !@trip.on_demand? || !@trip.driver.nil? %>
+			Conducteur : <%= link_to @trip.driver.login, :controller => 'users', :action => 'profile', :id => @trip.user_id %> 
+			- contact : <%= @trip.driver.email %><br/>
+		<% else %>
+			Passager : <%=h @trip.user_id %><br/>
+		<% end %>
+		Le : <%=h @trip.start_date.to_s(:long) %><br/>
+		Nombre de places restantes : <%= @trip.seat.to_i - @trip.users.size.to_i %>
+	</p>
+	
+	<h3>Liste des passagers</h3>
+	<% if @trip.users.size > 0 %>
+		<ul>
+			<% @trip.users.each do |user| %>
+				<li>
+					<%= link_to user.login, :controller => "users", :action => "profile", :id => user.id %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+</div>
+
+<% if logged_in? %>
+	<% not_registered_yet = true %>
+	<% if current_user.id != @trip.driver  %>
+		<% @trip.users.each do |user| %>
+			<% if user.id == current_user.id %>
+				<% not_registered_yet = false %>
+			<% end %>
+		<% end %>
+	<% end %>
+	<% if not_registered_yet && @trip.users.size() < @trip.seat %>
+		<%= button_to "M'ajouter en tant que passager", :controller => "Trips", :action => "add_passenger", :user_id => current_user.id, :trip_id => @trip.id %>
+	<% end %>
+<% end %>
+
+<div class="map-center">
+	<!--TODO si pas de JS : statis map-->
+	<%= render(:partial => "google_maps/map_trip" , :object => {:start => @trip.start_address, :end => @trip.end_address, :steps => @trip.steps }) -%>
+	<% if is_mobile? -%>
+		<script type="text/javascript"><!--
+					new Ajax.Request('/home/tirroir_right_rjs', {
+								method: 'post',
+								parameters: {
+										div_to_replace: 'profile_rjs',
+										content: '<div id="map_canvas" class="maps-mobile"></div>',
+										wrapper_id: 'map-wrapper',
+										button_id: 'map-button-trip',
+										button_id_supp: 'map-button-trip-supp'
+										},
+							onComplete: function() {
+									initialize();
+							}
+								});
+		//-->
+		</script>
+	<% else %>
+		<script type="text/javascript"><!--
+		document.write('<div id="map_canvas" class="maps-mobile"></div>');
+		initialize();
+		//-->
+		</script>
+
+	<% end -%>
+</div>
+
+<% if logged_in? %>
+
+	<h3>Etape du trajet et option</h3>
+	<% if @trip.steps.size > 0 %>
+		<ul>
+			<% @trip.steps.each do |step| %>
+				<li><%= step.step_address%></li>
+			<% end %>
+		</ul>
+	<% end %>
+	<% if !@trip.driver.nil? && (@trip.driver.id == current_user.id) %>
+		<fieldset>
+		<legend>Ajouter une etape</legend>
+		<% form_for '', :url => {:controller => "Trips", :action => 'add_step', :id => @trip.id} do |f| %>
+		<%= f.error_messages %>
+		
+		<p>
+			<%= f.label :step, "Etape" %><br />
+			<%= f.text_field :step %>
+		</p>
+		<p>
+			<%= f.submit 'Ajouter', :id => "submit_step" %>
+		</p>
+		<% end %>
+		</fieldset>
+	<% else %>
+			
+		<fieldset>
+		<legend>Proposer une étape</legend>
+		<% form_for '', :url => {:controller => "Trips", :action => 'propose_step', :id => @trip.id} do |f| %>
+		<%= f.error_messages %>
+
+		<p>
+			<%= f.label :step_request, "Etape" %><br />
+			<%= f.text_field :step_request %>
+		</p>
+		<p>
+			<%= f.submit 'Proposer', :id => "submit_propose_step" %>
+		</p>
+		<% end %>
+		</fieldset>
+		<% end %>
+	<% if @trip.driver.nil? %>
+		<fieldset>
+		<legend>Se proposer en tant que chauffeur</legend>
+		<% form_for '', :url => {:controller => "Trips", :action => 'propose_driver', :id => @trip.id} do |f| %>
+		<%= f.error_messages %>
+		<p>
+			<%= f.submit 'Se proposer', :id => "submit_driver" %>
+		</p>
+		<% end %>
+		</fieldset>
+	<% end %>
+	<%= render 'shared/line_navigation' -%>
+<% end %>

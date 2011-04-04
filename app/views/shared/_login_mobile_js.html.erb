@@ -1,0 +1,29 @@
+<div id="login-wrapper" class="tirroir-left tirroir-left-ferme tirroir-left-non-animate">
+    <div class="tirroir-left-wrapper">
+			<div class="tirroir-left-content">
+			<% if !logged_in? -%>
+				<div>
+				<fieldset>
+				<legend>Connectez vous</legend>
+        	<% form_tag session_path do -%>
+              <p><%= label_tag 'login', 'Identifiant' -%>
+              <%= text_field_tag 'login', @login, :size => 10%></p>
+              <p><%= label_tag  'password', 'Mot de passe' -%>
+              <%= password_field_tag 'password', nil , :size => 10%></p>
+              <p><%= submit_tag 'Se connecter' -%></p>
+              </fieldset>
+					<% end -%>
+                <%= link_to "S\'enregistrer", :controller => "users", :action => "new" -%>
+                        </div>
+				<% else -%>
+					<div id="divLogin">
+        			<%= link_to 'Se déconnecter', logout_path, :id => 'logout-button' -%>
+        			</div>
+				<% end -%>
+
+      </div>
+   </div>
+  <div class="tirroir-left-button" id="login-button" >
+		<div></div>
+	</div>
+</div>

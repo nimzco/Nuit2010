@@ -1,0 +1,28 @@
+<ul>
+<% @calendars.each do |cal| -%>
+	<li><%= link_to cal.title, :action => :events, :calendar_id => cal.id -%></li>
+<% end -%>
+</ul>
+
+<% if is_mobile? %>
+		<div id="map_rjs"></div>
+		<%
+			@cal = GCal4Ruby::Calendar.to_iframe_multiple({'roadrunneronrails%40gmail.com' => '%237ec225', 'f5vcru0e1r7tvvm2urqdnkvfgo%40group.calendar.google.com' => '%233640ad'} , {:bgcolor => '#FFF', :width => '100%', :height => '400', :showPrint => '0', :showTitle => '0', :showTz => '0', :showNav => '0'})
+		%>
+
+		<script type="text/javascript">
+					new Ajax.Request('/home/tirroir_left_rjs', {
+								method: 'post',
+								parameters: {
+										div_to_replace: 'map_rjs',
+										content: "<%= @cal %>",
+										wrapper_id: 'cal-wrapper',
+										button_id: 'cal-button',
+										button_id_supp: 'pull_the_page_to_cal'
+										}
+								});
+		</script>
+
+<% else %>
+	<%= GCal4Ruby::Calendar.to_iframe_multiple({"roadrunneronrails%40gmail.com" => "%237ec225", "f5vcru0e1r7tvvm2urqdnkvfgo%40group.calendar.google.com" => "%233640ad"} , {:bgcolor => '#FFF', :width => '100%', :height => '400', :showPrint => '0', :showTitle => '0', :showTz => '0', :showNav => '0'}) -%>
+<% end %>

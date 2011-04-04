@@ -1,0 +1,68 @@
+<%
+	## Similar to _table.html.erb
+%>
+<% if !pie_chart.nil? -%>
+	<% if !is_mobile? -%>
+		<script src="https://www.google.com/jsapi" type="text/javascript"></script>
+		<div id="visualization-piechart"></div>		
+		
+		<script type="text/javascript">
+      google.load("visualization", "1", {packages:["imagepiechart", "piechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+		<%
+			############################################################################################## Adding column with their type of value and name 
+			## Type of value: array which contains an array associating the type of the column value and the column name
+			## Example:
+			## 		@columnTypeAndName = [['string','Name'],['number','Salary'],['boolean','Full Time']]
+		%> 
+
+				<%= render :partial => 'column', :collection => pie_chart.headers -%>
+			  <% 
+			  	#@cellInformation = [['John', 1000, true], ['Mary', 25000, true], ['Paul', 4000, false]] 
+			  -%>
+				data.addRows(<%= h pie_chart.number_of_lines -%>);	    
+			  <% pie_chart.lines.each_with_index do |cell, i| -%>
+					  <% cell.each_with_index do |cellData, j|%>
+					  		data.setValue(<%= h i -%>, <%= h j -%>, <% if cellData.class == String -%><%= h "'" + cellData + "'" -%><% else -%><%= h cellData -%><% end -%>);	
+			 		<% end -%>
+			  <% end -%>
+
+        var chart = new google.visualization.PieChart(document.getElementById('visualization-piechart'));
+        chart.draw(data, {width: 450, height: 300, title: '<%= pie_chart.title -%>',colors: ['#e7dcb2','#c8bb95','#aa9977','#8b785a','#6c563c','#4d351f']});
+      }
+    </script>
+  <% end -%>
+	<% if !is_mobile? -%>
+		<noscript>
+	<% end %>	 	
+	<% ## If width < 600 show width else show 600x500	           
+		if pie_chart.number_of_row * 100 + 80 < 600 
+				@width = (pie_chart.number_of_row * 100 + 80).to_s
+				@height = (pie_chart.number_of_row * 75).to_s
+		else
+				@width = '600'
+				@height = '500'
+		end		           
+	%>
+	<% if is_mobile?
+			@width = '600'
+			@height = '300'
+		end %>
+		<div id="image_statistics">
+				<%= image_tag Gchart.pie( :title => pie_chart.title,
+										           :data => pie_chart.data_per_column, 
+										           :bar_colors => 'e7dcb2,4d351f', # Green: eefde4,337209
+										           ## If width < 600 show width else show 600x500
+															 :size => @width + 'x' + @height
+										           ) + '&chdl=' + pie_chart.x_label_url_params + '&chts=000000,20' + '&chof=gif', :alt => "", :width => @width, :height => @height
+				%>
+			</div>
+	   	<%= render :partial => 'html_table', :object => pie_chart -%>		
+	<% if !is_mobile? -%>
+		</noscript>
+	<% end %>
+<% else -%>
+	<p>Data display problem</p>
+<% end -%>

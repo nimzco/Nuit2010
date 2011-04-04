@@ -1,0 +1,15 @@
+<h1>Editing comment</h1>
+
+<% form_for :comment, :url => { :action => 'updateCom', :id => @comment.id} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :message %><br />
+    <%= f.text_area :message %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Annuler', :controller => 'comments', :action => 'show', :id => @comment.id %>

@@ -1,0 +1,16 @@
+<h3>Nouveau commentaire</h3>
+
+<% form_for :comment, :url => {:action => 'create'} do |f| %>
+  <%= f.error_messages %>
+
+  <%= f.hidden_field :user_id, :value => @comment.user_id %>
+
+  <p>
+    <%= f.label :message %><br />
+    <%= f.text_area :message %>
+  </p>
+  <p>
+    <%= f.submit 'Cr&eacute;er' %>
+  </p>
+<% end %>
+
